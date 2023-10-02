@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+   <record id="disease_covid" model="hospital.disease" forcecreate="False">
+       <field name="name">covid</field>
+   </record>
+   <record id="disease_flu" model="hospital.disease" forcecreate="False">
+       <field name="name">flu</field>
+   </record>
+    <record id="disease_mental_illness" model="hospital.disease" forcecreate="False">
+       <field name="name">mental illness</field>
+   </record>
+</odoo>

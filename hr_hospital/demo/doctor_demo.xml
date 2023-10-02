@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="doctor0" model="hospital.doctor" forcecreate="True">
+        <field name="name">Лікар Ай-болить</field>
+    </record>
+    <record id="doctor1" model="hospital.doctor" forcecreate="True">
+        <field name="name">Молчанова Ю.А.</field>
+    </record>
+    <record id="doctor2" model="hospital.doctor" forcecreate="True">
+        <field name="name">Khrusch V.M.</field>
+    </record>
+</odoo>
