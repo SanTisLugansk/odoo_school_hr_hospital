@@ -1,24 +1,21 @@
-# from odoo import models, fields, api
-from odoo import fields, models
+from odoo import api, fields, models, _
+from odoo.exceptions import ValidationError
 
-
-# class hr_hospital(models.Model):
-#     _name = 'hr_hospital.hr_hospital'
-#     _description = 'hr_hospital.hr_hospital'
-
-#     name = fields.Char()
-#     value = fields.Integer()
-#     value2 = fields.Float(compute="_value_pc", store=True)
-#     description = fields.Text()
-#
-#     @api.depends('value')
-#     def _value_pc(self):
-#         for record in self:
-#             record.value2 = float(record.value) / 100
 
 class HospitalDoctor(models.Model):
     _name = 'hospital.doctor'
     _description = 'Hospital Doctor'
+    _inherit = {'hospital.person'}
 
-    name = fields.Char(string='Full name', required=True)
-    # active = fields.Boolean(default=True, )
+    specialty = fields.Char(required=True)
+    intern_ids = fields.One2many(comodel_name='hospital.doctor',
+                                 inverse_name='mentor_id', string='Interns')
+    mentor_id = fields.Many2one(comodel_name='hospital.doctor')
+
+    @api.constrains('mentor_id')
+    def _constrains_mentor(self):
+        found_sp = self.search([('mentor_id.id', '!=', False)])
+        for rec in found_sp:
+            if rec == self.mentor_id:
+                raise ValidationError(_('Intern ' + rec.name +
+                                        ' cannot be a mentor'))

@@ -1,12 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <record id="doctor0" model="hospital.doctor" forcecreate="True">
+    <record id="doctor001" model="hospital.doctor" forcecreate="True">
         <field name="name">Лікар Ай-болить</field>
+        <field name="specialty">Сімейний лікар</field>
     </record>
-    <record id="doctor1" model="hospital.doctor" forcecreate="True">
+    <record id="doctor002" model="hospital.doctor" forcecreate="True">
         <field name="name">Молчанова Ю.А.</field>
+        <field name="specialty">Стоматолог</field>
     </record>
-    <record id="doctor2" model="hospital.doctor" forcecreate="True">
+    <record id="doctor003" model="hospital.doctor" forcecreate="True">
         <field name="name">Khrusch V.M.</field>
+        <field name="specialty">Psychologist</field>
     </record>
 </odoo>

@@ -5,9 +5,10 @@
         <field name="model">hospital.patient.visit</field>
         <field name="arch" type="xml">
             <tree>
-                <field name="patient"/>
+                <field name="patient_id"/>
+                <field name="doctor_id"/>
                 <field name="date"/>
-                <field name="disease"/>
+                <field name="state"/>
             </tree>
         </field>
     </record>
@@ -20,9 +21,11 @@
                 <header></header>
                 <sheet>
                     <group>
-                        <field name="patient"/>
+                        <field name="patient_id"/>
+                        <field name="doctor_id"/>
                         <field name="date"/>
-                        <field name="disease"/>
+                        <field name="state" readonly="1"/>
+                        <field name="diagnosis_ids"/>
                     </group>
                 </sheet>
             </form>
@@ -36,4 +39,9 @@
         <field name="view_mode">tree,form</field>
     </record>
 
+    <menuitem id="hospital_patient_visit_menu"
+              action="hospital_patient_visit_act_window"
+              parent="hospital_menu_root"
+              name="Patient visit"
+              sequence="900"/>
 </odoo>

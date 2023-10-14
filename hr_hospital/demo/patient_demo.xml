@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-      <record id="patient0" model="hospital.patient" forcecreate="True">
+      <record id="patient001" model="hospital.patient" forcecreate="True">
           <field name="name">Зайченя</field>
-          <field name="observing_doctor" eval="[Command.link(ref('doctor0'))]"/>
+          <field name="observing_doctor" eval="[Command.link(ref('doctor001'))]"/>
       </record>
-      <record id="patient1" model="hospital.patient" forcecreate="True">
+      <record id="patient002" model="hospital.patient" forcecreate="True">
           <field name="name">Корова</field>
       </record>
-      <record id="patient2" model="hospital.patient" forcecreate="True">
+      <record id="patient003" model="hospital.patient" forcecreate="True">
           <field name="name">Лисиця</field>
       </record>
 </odoo>

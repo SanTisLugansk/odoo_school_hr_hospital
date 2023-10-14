@@ -11,23 +11,27 @@
     # for the full list
     'category': 'Human Resources',
     'license': 'OPL-1',
-    'version': '16.0.1.0.0',
+    'version': '16.0.1.0.1',
 
     # any module necessary for this one to work correctly
-    'depends': [],
+    'depends': ['base',],
+    # 'external_dependencies': {'python': ['hospital_doctor_change'], },
 
     # always loaded
     'data': [
         'security/ir.model.access.csv',
-        'views/hospital_menu.xml',
-        'views/hospital_disease.xml',
-        'views/hospital_doctor.xml',
-        'views/hospital_patient.xml',
-        'views/hospital_patient_visit.xml',
+        'views/hospital_menu_views.xml',
+        'views/hospital_disease_views.xml',
+        'views/hospital_doctor_views.xml',
+        'views/hospital_patient_views.xml',
+        'views/hospital_patient_visit_views.xml',
+        'views/hospital_doctor_change_views.xml',
+        'views/hospital_diagnosis_views.xml',
         'data/disease_data.xml',
     ],
     # only loaded in demonstration mode
     'demo': [
+        'demo/disease_demo.xml',
         'demo/doctor_demo.xml',
         'demo/patient_demo.xml',
     ],

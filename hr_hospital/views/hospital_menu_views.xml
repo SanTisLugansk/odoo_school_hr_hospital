@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
 
-    <menuitem name="Hospital" id="hospital_menu_root"/>
+    <menuitem name="Hospital" id="hospital_menu_root" web_icon="hr_hospital,static/description/image2.png"/>
 
     <!-- menu categories -->
     <menuitem name="Lists" id="hospital_lists_menu" parent="hospital_menu_root"/>

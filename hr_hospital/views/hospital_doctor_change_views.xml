@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="hospital_doctor_change_tree" model="ir.ui.view">
+        <field name="name">hospital.doctor.change.tree()</field>
+        <field name="model">hospital.doctor.change</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="patient_id"/>
+                <field name="doctor_id"/>
+                <field name="date"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="hospital_doctor_change_act_window" model="ir.actions.act_window">
+        <field name="name">Change of doctors for patients</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">hospital.doctor.change</field>
+        <field name="view_mode">tree</field>
+    </record>
+
+    <menuitem id="hospital_doctor_change_menu"
+              action="hospital_doctor_change_act_window"
+              parent="hospital_menu_root"
+              name="Change of doctors for patients"
+              sequence="990"/>
+</odoo>

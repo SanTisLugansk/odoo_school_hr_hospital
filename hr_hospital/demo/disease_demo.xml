@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="heart_disease" model="hospital.disease" forcecreate="True">
+        <field name="name">Heart disease</field>
+    </record>
+    <record id="cardiac_ischemia" model="hospital.disease" forcecreate="True">
+        <field name="name">Cardiac ischemia</field>
+        <field name="parent_id" ref="heart_disease"/>
+    </record>
+    <record id="myocardial_infarction" model="hospital.disease" forcecreate="True">
+        <field name="name">Myocardial infarction</field>
+        <field name="parent_id" ref="heart_disease"/>
+    </record>
+    <record id="venereal_diseases" model="hospital.disease" forcecreate="True">
+        <field name="name">Venereal diseases</field>
+    </record>
+</odoo>
