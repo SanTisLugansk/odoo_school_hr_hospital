@@ -15,7 +15,6 @@
 
     # any module necessary for this one to work correctly
     'depends': ['base',],
-    # 'external_dependencies': {'python': ['hospital_doctor_change'], },
 
     # always loaded
     'data': [
@@ -27,6 +26,7 @@
         'views/hospital_patient_visit_views.xml',
         'views/hospital_doctor_change_views.xml',
         'views/hospital_diagnosis_views.xml',
+        'views/hospital_doctor_schedule_views.xml',
         'data/disease_data.xml',
     ],
     # only loaded in demonstration mode

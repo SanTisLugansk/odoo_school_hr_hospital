@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="hospital_doctor_schedule_tree" model="ir.ui.view">
+        <field name="name">hospital.doctor.schedule.tree()</field>
+        <field name="model">hospital.doctor.schedule</field>
+        <field name="arch" type="xml">
+            <tree editable="bottom">
+                <field name="doctor_id"/>
+                <field name="date"/>
+                <field name="hour"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="hospital_doctor_schedule_act_window" model="ir.actions.act_window">
+        <field name="name">Doctor schedule</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">hospital.doctor.schedule</field>
+        <field name="view_mode">tree</field>
+    </record>
+
+    <menuitem id="hospital_doctor_schedule_menu"
+              action="hospital_doctor_schedule_act_window"
+              parent="hospital_doctor_info_menu"
+              name="Doctor schedule"
+              sequence="900"/>
+</odoo>

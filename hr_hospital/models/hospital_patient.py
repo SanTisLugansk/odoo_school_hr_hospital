@@ -38,3 +38,13 @@ class HospitalPatient(models.Model):
                                       'doctor_id': vals['observing_doctor_id'],
                                       'patient_id': rec.id})]})
         return super().write(vals)
+
+    @api.model
+    def create(self, vals_list):
+        res = super().create(vals_list)
+        if res.observing_doctor_id:
+            res.write(dict(history_ids=[(0, 0, {'date': fields.datetime.now(),
+                                                'doctor_id':
+                                                    res.observing_doctor_id.id,
+                                                'patient_id': res.id})]))
+        return res

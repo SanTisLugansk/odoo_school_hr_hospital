@@ -24,6 +24,7 @@
                         <field name="patient_id"/>
                         <field name="doctor_id"/>
                         <field name="date"/>
+                        <field name="schedule_sel"/>      <!--      -->
                         <field name="state" readonly="1"/>
                         <field name="diagnosis_ids"/>
                     </group>

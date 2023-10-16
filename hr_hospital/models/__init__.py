@@ -6,4 +6,5 @@ from . import (
     hospital_patient,
     hospital_doctor_change,
     hospital_contact_person,
-    hospital_patient_visit)
+    hospital_patient_visit,
+    hospital_doctor_schedule)

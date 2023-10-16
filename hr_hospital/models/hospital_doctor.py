@@ -14,8 +14,19 @@ class HospitalDoctor(models.Model):
 
     @api.constrains('mentor_id')
     def _constrains_mentor(self):
-        found_sp = self.search([('mentor_id.id', '!=', False)])
-        for rec in found_sp:
-            if rec == self.mentor_id:
-                raise ValidationError(_('Intern ' + rec.name +
+        for rec in self:
+            if rec.mentor_id._is_intern():
+                raise ValidationError(_('Intern ' + rec.mentor_id.name +
                                         ' cannot be a mentor'))
+            if rec._is_mentor() and rec.mentor_id.id:
+                raise ValidationError(_('You cannot install a mentor for'
+                                        ' a mentor ' + rec.name))
+
+    def _is_intern(self):
+        for rec in self:
+            return bool(rec.mentor_id.id)
+
+    def _is_mentor(self):
+        for rec in self:
+            found_count = self.search_count([('mentor_id.id', '=', rec.id)])
+            return bool(found_count)

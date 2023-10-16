@@ -21,7 +21,7 @@
 
     <menuitem id="hospital_doctor_change_menu"
               action="hospital_doctor_change_act_window"
-              parent="hospital_menu_root"
+              parent="hospital_doctor_info_menu"
               name="Change of doctors for patients"
-              sequence="990"/>
+              sequence="800"/>
 </odoo>

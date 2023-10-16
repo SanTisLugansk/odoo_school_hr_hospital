@@ -25,6 +25,7 @@
                         <field name="date"/>
                         <field name="disease_ids" widget="many2many_tags"/>
                         <field name="appointment"/>
+                        <field name="needed_doctor_comment"/>
                     </group>
                 </sheet>
             </form>
