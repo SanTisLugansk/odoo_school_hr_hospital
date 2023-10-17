@@ -24,6 +24,7 @@
                     <group>
                         <field name="name"/>
                         <field name="phone"/>
+                        <field name="email"/>
                         <field name="gender"/>
                         <field name="passport_data"/>
                         <field name="contact_person_ids" widget="many2many_tags"/>

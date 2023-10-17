@@ -4,7 +4,7 @@
         <field name="name">hospital.doctor.schedule.tree()</field>
         <field name="model">hospital.doctor.schedule</field>
         <field name="arch" type="xml">
-            <tree editable="bottom">
+            <tree editable='bottom' default_order='doctor_id, date, hour'>
                 <field name="doctor_id"/>
                 <field name="date"/>
                 <field name="hour"/>

@@ -4,9 +4,9 @@
         <field name="name">hospital.doctor.tree()</field>
         <field name="model">hospital.doctor</field>
         <field name="arch" type="xml">
-            <tree>
-                <field name="specialty"/>
+            <tree default_order='name'>
                 <field name="name"/>
+                <field name="specialty"/>
                 <field name="phone"/>
                 <field name="gender"/>
             </tree>
@@ -23,6 +23,7 @@
                     <group>
                         <field name="name"/>
                         <field name="phone"/>
+                        <field name="email"/>
                         <field name="gender"/>
                         <field name="specialty"/>
                         <field name="mentor_id"/>

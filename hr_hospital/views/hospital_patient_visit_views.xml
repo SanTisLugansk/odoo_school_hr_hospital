@@ -4,7 +4,7 @@
         <field name="name">hospital.patient.visit.tree()</field>
         <field name="model">hospital.patient.visit</field>
         <field name="arch" type="xml">
-            <tree>
+            <tree default_order='patient_id, doctor_id, date'>
                 <field name="patient_id"/>
                 <field name="doctor_id"/>
                 <field name="date"/>
@@ -24,9 +24,10 @@
                         <field name="patient_id"/>
                         <field name="doctor_id"/>
                         <field name="date"/>
-                        <field name="schedule_sel"/>      <!--      -->
+                        <field name="schedule"/>      <!--      -->
                         <field name="state" readonly="1"/>
                         <field name="diagnosis_ids"/>
+                        <field name="date_only"/>
                     </group>
                 </sheet>
             </form>

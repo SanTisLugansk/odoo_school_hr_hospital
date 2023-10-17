@@ -4,7 +4,7 @@
         <field name="name">hospital.doctor.change.tree()</field>
         <field name="model">hospital.doctor.change</field>
         <field name="arch" type="xml">
-            <tree>
+            <tree default_order='patient_id, date'>
                 <field name="patient_id"/>
                 <field name="doctor_id"/>
                 <field name="date"/>
