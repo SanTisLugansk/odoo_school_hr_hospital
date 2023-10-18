@@ -6,6 +6,12 @@
         <field name="model">hospital.patient</field>
         <field name="arch" type="xml">
             <tree>
+                <header>
+                    <button name="hospital_change_doctor_multi_wizard_act_window"
+                            string="Change observing doctor"
+                            class="oe_highlight"
+                            type="object"  />
+                </header>
                 <field name="name"/>
                 <field name="phone"/>
                 <field name="gender"/>
@@ -50,4 +56,5 @@
               parent="hospital_lists_menu"
               name="Patients"
               sequence="300"/>
+
 </odoo>

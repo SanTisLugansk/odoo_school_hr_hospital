@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="hospital_change_doctor_multi_wizard_tree" model="ir.ui.view">
+        <field name="name">hospital.change.doctor.multi.wizard.view.form</field>
+        <field name="model">hospital.change.doctor.multi.wizard</field>
+        <field name="arch" type="xml">
+            <form>
+                <group>
+                    <field name="patient_ids" options="{'no_create': True}" widget="many2many_tags"/>
+                    <field name="doctor_id" options="{'no_create': True}"/>
+                </group>
+                <footer>
+                    <button name="action_change_observing_doctor"
+                            string="Change observing doctor"
+                            type="object"
+                            icon="fa-change"
+                            class="btn-primary"
+                    />
+                    <button special="cancel" class="oe_linc" string="Cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+</odoo>

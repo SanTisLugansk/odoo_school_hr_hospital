@@ -28,6 +28,7 @@
         'views/hospital_diagnosis_views.xml',
         'views/hospital_doctor_schedule_views.xml',
         'data/disease_data.xml',
+        'views/hospital_change_doctor_multi_wizard_views.xml'
     ],
     # only loaded in demonstration mode
     'demo': [

@@ -1,5 +1,4 @@
-from odoo import api, fields, models
-# from . import hospital_doctor_change
+from odoo import api, fields, models, _
 
 
 class HospitalPatient(models.Model):
@@ -48,3 +47,14 @@ class HospitalPatient(models.Model):
                                                     res.observing_doctor_id.id,
                                                 'patient_id': res.id})]))
         return res
+
+    def hospital_change_doctor_multi_wizard_act_window(self):
+        patient_ids = []
+        for rec in self:
+            patient_ids.append(rec.id)
+        return {'name': _('Change observing doctor wizard'),
+                'type': 'ir.actions.act_window',
+                'view_mode': 'form',
+                'res_model': 'hospital.change.doctor.multi.wizard',
+                'target': 'new',
+                'context': {'default_patient_ids': patient_ids}}
