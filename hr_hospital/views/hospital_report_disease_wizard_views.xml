@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="hospital_report_disease_wizard_form" model="ir.ui.view">
+        <field name="name">hospital.report.disease.wizard.form()</field>
+        <field name="model">hospital.report.disease.wizard</field>
+        <field name="arch" type="xml">
+            <form>
+                <header></header>
+                <sheet>
+                    <group>
+                        <field name="date_month"/>
+                    </group>
+                </sheet>
+                <footer>
+                    <button name="generate_report_method" type="object" string="generate report"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="hospital_report_disease_wizard_act_window" model="ir.actions.act_window">
+        <field name="name">Hospital disease report for the month</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">hospital.report.disease.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+
+    <menuitem id="hospital_report_disease_wizard_menu"
+              action="hospital_report_disease_wizard_act_window"
+              parent="hospital_menu_root"
+              name="Hospital disease report for the month"
+              sequence="1800"/>
+
+    <record id="hospital_report_disease_line_tree" model="ir.ui.view">
+        <field name="name">hospital.report.disease.line.tree()</field>
+        <field name="model">hospital.report.disease.line</field>
+        <field name="arch" type="xml">
+            <tree default_order='disease_id, date, doctor_id'>
+                <field name="disease_id"/>
+                <field name="date"/>
+                <field name="doctor_id"/>
+                <field name="patient_id"/>
+            </tree>
+        </field>
+    </record>
+
+</odoo>
