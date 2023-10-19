@@ -11,8 +11,9 @@ class HospitalReportDiseaseWizard(models.TransientModel):
     def generate_report_method(self):
         self.env['hospital.report.disease.line'].sudo().search([]).unlink()
 
-        diagnosis_ids = self.env['hospital.diagnosis'].sudo().search([('date', '>=', date_utils.start_of(self.date_month, "month")),
-                                                                      ('date', '<=', date_utils.end_of(self.date_month, "month"))])
+        diagnosis_ids = self.env['hospital.diagnosis'].sudo().search(
+            [('date', '>=', date_utils.start_of(self.date_month, "month")),
+             ('date', '<=', date_utils.end_of(self.date_month, "month"))])
         for diagnosis in diagnosis_ids:
             for disease in diagnosis.disease_ids:
                 self.env['hospital.report.disease.line'].sudo().create({
@@ -28,6 +29,7 @@ class HospitalReportDiseaseWizard(models.TransientModel):
                 'view_mode': 'list',
                 'res_model': 'hospital.report.disease.line',
                 'target': 'inline'}
+
 
 class HospitalReportDiseaseLine(models.TransientModel):
     _name = 'hospital.report.disease.line'

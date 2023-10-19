@@ -1,4 +1,4 @@
-from odoo import api, fields, models
+from odoo import fields, models
 
 
 class HospitalDiagnosis (models.Model):
@@ -6,8 +6,6 @@ class HospitalDiagnosis (models.Model):
     _description = 'Hospital Diagnosis'
 
     date = fields.Date(string='Date of diagnosis')
-    date_year = fields.Integer(compute='_compute_date')
-    date_month = fields.Integer(compute='_compute_date')
     doctor_id = fields.Many2one(comodel_name='hospital.doctor', required=True)
     patient_id = fields.Many2one(comodel_name='hospital.patient',
                                  required=True)
@@ -26,10 +24,3 @@ class HospitalDiagnosis (models.Model):
                 rec.needed_doctor_comment = True
             else:
                 rec.needed_doctor_comment = False
-
-    @api.depends('date')
-    def _compute_date(self):
-        for rec in self:
-            rec.date_month = rec.date.month
-            rec.date_year = rec.date.year
-
