@@ -30,7 +30,8 @@
         'data/disease_data.xml',
         'views/hospital_change_doctor_multi_wizard_views.xml',
         'views/hospital_report_disease_wizard_views.xml',
-        'views/hospital_change_doctor_appointment_wizard.xml'
+        'views/hospital_change_doctor_appointment_wizard.xml',
+        'views/hospital_fill_doctor_schedule_wizard_views.xml'
     ],
     # only loaded in demonstration mode
     'demo': [

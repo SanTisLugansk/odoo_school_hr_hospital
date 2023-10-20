@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="hospital_schedule_hour_tree" model="ir.ui.view">
+        <field name="name">hospital.schedule.hour.tree()</field>
+        <field name="model">hospital.schedule.hour</field>
+        <field name="arch" type="xml">
+            <tree editable='bottom'>
+                <field name="hour"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="hospital_schedule_day_tree" model="ir.ui.view">
+        <field name="name">hospital.schedule.day.tree()</field>
+        <field name="model">hospital.schedule.day</field>
+        <field name="arch" type="xml">
+            <tree editable='bottom'>
+                <field name="weekday"/>
+                <field name="hour_ids"  widget="many2many_tags"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="hospital_fill_doctor_schedule_wizard_form" model="ir.ui.view">
+        <field name="name">hospital.fill.doctor.schedule.wizard.form()</field>
+        <field name="model">hospital.fill.doctor.schedule.wizard</field>
+        <field name="arch" type="xml">
+            <form>
+                <header></header>
+                <sheet>
+                    <group>
+                        <field name="doctor_id"/>
+                        <field name="weekday_type"/>
+                        <field name="date_start"/>
+                        <field name="date_end"/>
+                        <field name="weekday_ids"/>
+                    </group>
+                </sheet>
+                <footer>
+                    <button name="to_fill_doctor_schedule" type="object" string="to fill"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="hospital_fill_doctor_schedule_wizard_act_window" model="ir.actions.act_window">
+        <field name="name">Hospital fill out the doctor's schedule</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">hospital.fill.doctor.schedule.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+
+    <menuitem id="hospital_fill_doctor_schedule_wizard_menu"
+              action="hospital_fill_doctor_schedule_wizard_act_window"
+              parent="hospital_doctor_info_menu"
+              name="Fill out doctor's schedule"
+              sequence="1800"/>
+</odoo>
