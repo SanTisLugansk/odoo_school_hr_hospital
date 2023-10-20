@@ -18,7 +18,14 @@
         <field name="model">hospital.patient.visit</field>
         <field name="arch" type="xml">
             <form>
-                <header></header>
+                <header>
+                    <button name="hospital_change_appointment_wizard_act_window"
+                            string="Change the time / doctor visit"
+                            class="oe_highlight"
+                            type="object"
+                            attrs="{'invisible': [('state', '==', 'done')]}"/>
+                </header>
+
                 <sheet>
                     <group>
                         <field name="patient_id"/>

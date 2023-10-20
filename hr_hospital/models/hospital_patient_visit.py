@@ -23,6 +23,10 @@ class HospitalPatientVisit(models.Model):
                                domain="[('doctor_id', '=', doctor_id), "
                                       "('date', '=', date_only)]")
 
+    def name_get(self):
+        return [(rec.id, f'patient: {rec.patient_id.name}  at {rec.date}  '
+                         f'doctor: {rec.doctor_id.name}') for rec in self]
+
     @api.model
     def cron_done(self):
         # ця процедура автоматично виконується кожної години
@@ -63,3 +67,17 @@ class HospitalPatientVisit(models.Model):
             if len(rec.diagnosis_ids) > 0:
                 raise ValidationError(_('You cannot delete '
                                         'a visit with a diagnosis'))
+
+    def hospital_change_appointment_wizard_act_window(self):
+        # patient_ids = []
+        # for rec in self:
+        #     patient_ids.append(rec.id)
+        return {'name': _('Change observing doctor wizard'),
+                'type': 'ir.actions.act_window',
+                'view_mode': 'form',
+                'res_model': 'hospital.change.doctor.appointment.wizard',
+                'target': 'new',
+                'context': {'default_visit_id': self.id,
+                            # 'default_visit_doctor_id': self.doctor_id.id,
+                            # 'default_visit_date': self.date
+                            }}

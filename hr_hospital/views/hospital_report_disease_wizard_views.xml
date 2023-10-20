@@ -12,7 +12,8 @@
                     </group>
                 </sheet>
                 <footer>
-                    <button name="generate_report_method" type="object" string="generate report"/>
+                    <button name="generate_report" type="object" string="generate report"/>
+                    <button name="generate_report_detail" type="object" string="generate report detail"/>
                 </footer>
             </form>
         </field>
@@ -28,7 +29,7 @@
 
     <menuitem id="hospital_report_disease_wizard_menu"
               action="hospital_report_disease_wizard_act_window"
-              parent="hospital_menu_root"
+              parent="hospital_report"
               name="Hospital disease report for the month"
               sequence="1800"/>
 
@@ -38,6 +39,8 @@
         <field name="arch" type="xml">
             <tree default_order='disease_id, date, doctor_id'>
                 <field name="disease_id"/>
+                <field name="disease_count"
+                       attrs="{'invisible': [('disease_count', '==', 0)]}"/>
                 <field name="date"/>
                 <field name="doctor_id"/>
                 <field name="patient_id"/>

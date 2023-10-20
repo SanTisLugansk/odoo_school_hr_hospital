@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="hospital_change_doctor_appointment_wizard_form" model="ir.ui.view">
+        <field name="name">hospital.change.doctor.appointment.wizard.view.form</field>
+        <field name="model">hospital.change.doctor.appointment.wizard</field>
+        <field name="arch" type="xml">
+            <form>
+                <group>
+                    <field name="visit_id" options="{'no_create': True}"/>
+                    <field name="visit_doctor_id" attrs="{'invisible': True}"/>
+                    <field name="visit_date" attrs="{'invisible': 1}"/>
+                    <field name="schedule_id" options="{'no_create': True}"/>
+                </group>
+                <footer>
+                    <button name="action_change_doctor_appointment"
+                            string="Change the time / doctor visit"
+                            type="object"
+                            icon="fa-change"
+                            class="btn-primary"
+                    />
+                    <button special="cancel" class="oe_linc" string="Cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+</odoo>
