@@ -7,6 +7,7 @@
             <tree>
                 <field name="patient_id"/>
                 <field name="doctor_id"/>
+                <field name="disease_ids" widget="many2many_tags"/>
                 <field name="date"/>
             </tree>
         </field>

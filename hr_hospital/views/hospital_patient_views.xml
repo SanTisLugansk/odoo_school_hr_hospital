@@ -25,7 +25,9 @@
         <field name="model">hospital.patient</field>
         <field name="arch" type="xml">
             <form>
-                <header></header>
+                <header>
+                    <button name="visit_history" type="object" string="visit history"/>
+                </header>
                 <sheet>
                     <group>
                         <field name="name"/>
@@ -38,6 +40,8 @@
                         <field name="observing_doctor_id"/>
                         <field name="date_of_birth"/>
                         <field name="age"/>
+                        <field name="doctor_change_ids"/>
+                        <field name="diagnosis_ids"/>
                     </group>
                 </sheet>
             </form>

@@ -14,6 +14,10 @@ class HospitalPatient(models.Model):
     observing_doctor_id = fields.Many2one(comodel_name='hospital.doctor')
     history_ids = fields.One2many(comodel_name='hospital.doctor.change',
                                   inverse_name='patient_id')
+    doctor_change_ids = fields.One2many(comodel_name='hospital.doctor.change',
+                                        inverse_name='patient_id')
+    diagnosis_ids = fields.One2many(comodel_name='hospital.diagnosis',
+                                    inverse_name='patient_id')
 
     @api.depends('date_of_birth')
     def _compute_age(self):
