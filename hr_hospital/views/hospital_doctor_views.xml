@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <record id="hospital_doctor_tree" model="ir.ui.view">
-        <field name="name">hospital.doctor.tree()</field>
+        <field name="name">hospital.doctor.tree</field>
         <field name="model">hospital.doctor</field>
         <field name="arch" type="xml">
             <tree default_order='name'>
@@ -14,7 +14,7 @@
     </record>
 
     <record id="hospital_doctor_form" model="ir.ui.view">
-        <field name="name">hospital.doctor.form()</field>
+        <field name="name">hospital.doctor.form</field>
         <field name="model">hospital.doctor</field>
         <field name="arch" type="xml">
             <form>

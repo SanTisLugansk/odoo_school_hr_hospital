@@ -5,6 +5,7 @@ from odoo import fields, models
 
 class HospitalScheduleHour(models.TransientModel):
     _name = 'hospital.schedule.hour'
+    _description = 'hospital schedule hour'
     hour = fields.Selection(selection=[('6', '6'), ('7', '7'), ('8', '8'),
                                        ('9', '9'), ('10', '10'), ('11', '11'),
                                        ('12', '12'), ('13', '13'),
@@ -19,6 +20,7 @@ class HospitalScheduleHour(models.TransientModel):
 
 class HospitalScheduleDay(models.TransientModel):
     _name = 'hospital.schedule.day'
+    _description = 'hospital schedule day'
     weekday = fields.Selection(selection=[('0', 'Monday'),
                                           ('1', 'Tuesday'),
                                           ('2', 'Wednesday'),
