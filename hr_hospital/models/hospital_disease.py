@@ -3,6 +3,7 @@ from odoo.exceptions import ValidationError
 
 
 class HospitalDisease(models.Model):
+    # Хвороби
     _name = 'hospital.disease'
     _description = 'Hospital Disease'
     _parent_name = "parent_id"

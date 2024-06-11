@@ -3,6 +3,7 @@ from odoo.exceptions import ValidationError
 
 
 class HospitalDoctor(models.Model):
+    # Лікарі
     _name = 'hospital.doctor'
     _description = 'Hospital Doctor'
     _inherit = {'hospital.person'}

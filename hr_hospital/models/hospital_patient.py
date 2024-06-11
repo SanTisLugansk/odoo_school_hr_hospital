@@ -2,6 +2,7 @@ from odoo import api, fields, models, _
 
 
 class HospitalPatient(models.Model):
+    # Пацієнти
     _name = 'hospital.patient'
     _description = 'Hospital Patient'
     _inherit = {'hospital.person'}
