@@ -46,7 +46,7 @@ class HospitalPatient(models.Model):
     # @api.model
     @api.model_create_multi
     def create(self, vals_list):
-        res = super(self).create(vals_list)
+        res = super().create(vals_list)
         for rec_res in res:
             if rec_res.observing_doctor_id:
                 rec_res.write(dict(history_ids=[(0, 0, {'date': fields.datetime.now(),
