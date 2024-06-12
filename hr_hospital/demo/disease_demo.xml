@@ -14,4 +14,15 @@
     <record id="venereal_diseases" model="hospital.disease" forcecreate="True">
         <field name="name">Venereal diseases</field>
     </record>
+    <record id="indecent_disease" model="hospital.disease" forcecreate="True">
+        <field name="name">Indecent disease</field>
+        <field name="parent_id" ref="venereal_diseases"/>
+    </record>
+    <record id="general_respiratory_disease" model="hospital.disease" forcecreate="True">
+        <field name="name">General respiratory disease</field>
+    </record>
+    <record id="cold" model="hospital.disease" forcecreate="True">
+        <field name="name">Cold</field>
+        <field name="parent_id" ref="general_respiratory_disease"/>
+    </record>
 </odoo>

@@ -12,4 +12,8 @@
         <field name="name">Khrusch V.M.</field>
         <field name="specialty">Psychologist</field>
     </record>
+    <record id="doctor_demo" model="hospital.doctor" forcecreate="True">
+        <field name="name">demo doctor</field>
+        <field name="specialty">demo specialty</field>
+    </record>
 </odoo>

@@ -23,5 +23,4 @@ class HospitalDoctorSchedule(models.Model):
                 raise ValidationError(_('Entry is already in the schedule'))
 
     def name_get(self):
-        return [(rec.id, f'{rec.doctor_id.name}  {rec.date} '
-                         f' hour: {rec.hour}') for rec in self]
+        return [(rec.id, f'{rec.doctor_id.name}  {rec.date}  hour: {rec.hour}') for rec in self]

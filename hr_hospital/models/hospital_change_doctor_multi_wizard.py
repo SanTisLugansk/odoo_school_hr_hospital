@@ -11,8 +11,4 @@ class HospitalChangeDoctorMultiWizard(models.TransientModel):
 
     def action_change_observing_doctor(self):
         for rec in self:
-            rec.write({
-                'patient_ids': [(1, rec.patient_ids.ids,
-                                 {'observing_doctor_id': rec.doctor_id.id}
-                                 )]
-            })
+            rec.write({'patient_ids': [(1, rec.patient_ids.ids, {'observing_doctor_id': rec.doctor_id.id})]})

@@ -16,15 +16,12 @@ class HospitalChangeDoctorAppointmentWizard(models.TransientModel):
     def _onchange_schedule(self):
         if self.schedule_id.date:
             self.visit_doctor_id = self.schedule_id.doctor_id
-            self.visit_date = datetime.combine(self.schedule_id.date,
-                                               time(self.schedule_id.hour,
-                                                    0, 0))
+            self.visit_date = datetime.combine(self.schedule_id.date, time(self.schedule_id.hour, 0, 0))
 
     def action_change_doctor_appointment(self):
         for rec in self:
             if rec.visit_id.state == 'done':
-                raise ValidationError(_('The visit to the doctor has already '
-                                        'take, changes are not possible'))
+                raise ValidationError(_('The visit to the doctor has already take, changes are not possible'))
 
             schedule_count = self.env['hospital.patient.visit'].sudo().\
                 search_count([('schedule', '=', rec.schedule_id.id)])

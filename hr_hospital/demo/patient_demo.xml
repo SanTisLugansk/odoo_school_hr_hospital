@@ -2,7 +2,11 @@
 <odoo>
       <record id="patient001" model="hospital.patient" forcecreate="True">
           <field name="name">Зайченя</field>
-          <field name="observing_doctor" eval="[Command.link(ref('doctor001'))]"/>
+          <field name="observing_doctor_id" ref="doctor001"/>
+      </record>
+     <record id="patient_demo" model="hospital.patient" forcecreate="True">
+          <field name="name">demo patient</field>
+          <field name="observing_doctor_id" ref="doctor_demo"/>
       </record>
       <record id="patient002" model="hospital.patient" forcecreate="True">
           <field name="name">Корова</field>

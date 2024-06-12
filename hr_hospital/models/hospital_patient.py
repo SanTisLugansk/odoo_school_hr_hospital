@@ -10,15 +10,11 @@ class HospitalPatient(models.Model):
     date_of_birth = fields.Date()
     age = fields.Integer(compute='_compute_age')
     passport_data = fields.Text()
-    contact_person_ids = fields.Many2many(
-        comodel_name='hospital.contact.person')
+    contact_person_ids = fields.Many2many(comodel_name='hospital.contact.person')
     observing_doctor_id = fields.Many2one(comodel_name='hospital.doctor')
-    history_ids = fields.One2many(comodel_name='hospital.doctor.change',
-                                  inverse_name='patient_id')
-    doctor_change_ids = fields.One2many(comodel_name='hospital.doctor.change',
-                                        inverse_name='patient_id')
-    diagnosis_ids = fields.One2many(comodel_name='hospital.diagnosis',
-                                    inverse_name='patient_id')
+    history_ids = fields.One2many(comodel_name='hospital.doctor.change', inverse_name='patient_id')
+    doctor_change_ids = fields.One2many(comodel_name='hospital.doctor.change', inverse_name='patient_id')
+    diagnosis_ids = fields.One2many(comodel_name='hospital.diagnosis', inverse_name='patient_id')
 
     @api.depends('date_of_birth')
     def _compute_age(self):
@@ -27,20 +23,17 @@ class HospitalPatient(models.Model):
                 rec.age = 0
             else:
                 today = fields.datetime.now()
-                rec.age = today.year-rec.date_of_birth.year
-                if rec.age > 0 and (rec.date_of_birth.month > today.month or
-                                    (rec.date_of_birth.month == today.month and
-                                     rec.date_of_birth.day > today.day)):
+                rec.age = today.year - rec.date_of_birth.year
+                if rec.age > 0 and (rec.date_of_birth.month > today.month
+                                    or (rec.date_of_birth.month == today.month and rec.date_of_birth.day > today.day)):
                     rec.age -= 1
 
     def write(self, vals):
         if 'observing_doctor_id' in vals:
             for rec in self:
-                rec.write({
-                    'history_ids': [(0, 0,
-                                     {'date': fields.datetime.now(),
-                                      'doctor_id': vals['observing_doctor_id'],
-                                      'patient_id': rec.id})]})
+                rec.write({'history_ids': [(0, 0, {'date': fields.datetime.now(),
+                                                   'doctor_id': vals['observing_doctor_id'],
+                                                   'patient_id': rec.id})]})
         return super().write(vals)
 
     # @api.model

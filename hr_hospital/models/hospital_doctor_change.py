@@ -7,5 +7,4 @@ class HospitalDoctorChange(models.Model):
 
     date = fields.Datetime(readonly=True)
     doctor_id = fields.Many2one(comodel_name='hospital.doctor', readonly=True)
-    patient_id = fields.Many2one(comodel_name='hospital.patient',
-                                 readonly=True)
+    patient_id = fields.Many2one(comodel_name='hospital.patient', readonly=True)
