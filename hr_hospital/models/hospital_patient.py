@@ -47,7 +47,7 @@ class HospitalPatient(models.Model):
                                                     'patient_id': rec.id})]))
         return result
 
-    def hospital_change_doctor_multi_wizard_act_window(self):
+    def hospital_change_doctor_multi(self):
         patient_ids = []
         for rec in self:
             patient_ids.append(rec.id)

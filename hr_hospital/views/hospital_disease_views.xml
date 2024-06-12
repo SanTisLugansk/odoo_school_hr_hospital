@@ -33,10 +33,6 @@
         <field name="view_mode">tree,form</field>
     </record>
 
-    <menuitem id="hospital_disease_menu"
-              action="hospital_disease_act_window"
-              parent="hospital_menu_root"
-              name="Disease"
-              sequence="800"/>
+    <menuitem id="hospital_disease_menu" action="hospital_disease_act_window" parent="hospital_menu_root" name="Disease" sequence="300"/>
 
 </odoo>

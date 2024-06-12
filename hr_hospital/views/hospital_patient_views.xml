@@ -7,10 +7,7 @@
         <field name="arch" type="xml">
             <tree>
                 <header>
-                    <button name="hospital_change_doctor_multi_wizard_act_window"
-                            string="Change observing doctor"
-                            class="oe_highlight"
-                            type="object"  />
+                    <button name="hospital_change_doctor_multi" string="Change observing doctor" class="oe_highlight" type="object"/>
                 </header>
                 <field name="name"/>
                 <field name="phone"/>
@@ -55,5 +52,5 @@
         <field name="view_mode">tree,form</field>
     </record>
 
-    <menuitem id="hospital_patient_menu" action="hospital_patient_act_window" parent="hospital_lists_menu" name="Patients" sequence="300"/>
+    <menuitem id="hospital_patient_menu" action="hospital_patient_act_window" parent="hospital_patient_info_menu" name="Patients" sequence="100"/>
 </odoo>

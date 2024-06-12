@@ -32,4 +32,14 @@
             </form>
         </field>
     </record>
+
+    <record id="hospital_diagnosis_act_window" model="ir.actions.act_window">
+        <field name="name">Diagnosis</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">hospital.diagnosis</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem id="hospital_diagnosis_menu" action="hospital_diagnosis_act_window" parent="hospital_menu_root" name="Diagnosis" sequence="500"/>
+
 </odoo>

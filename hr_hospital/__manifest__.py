@@ -18,10 +18,10 @@
 
     # always loaded
     'data': ['security/ir.model.access.csv',
+             'views/hospital_menu_views.xml',
              'views/hospital_disease_views.xml',
              'views/hospital_doctor_views.xml',
              'views/hospital_patient_views.xml',
-             'views/hospital_menu_views.xml',
              'views/hospital_diagnosis_views.xml',
              'views/hospital_patient_visit_views.xml',
              'views/hospital_doctor_change_views.xml',

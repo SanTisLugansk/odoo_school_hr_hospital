@@ -42,5 +42,5 @@
         <field name="view_mode">tree,form</field>
     </record>
 
-    <menuitem id="hospital_doctor_menu" action="hospital_doctor_act_window" parent="hospital_lists_menu" name="Doctors" sequence="200"/>
+    <menuitem id="hospital_doctor_menu" action="hospital_doctor_act_window" parent="hospital_doctor_info_menu" name="Doctors" sequence="100"/>
 </odoo>

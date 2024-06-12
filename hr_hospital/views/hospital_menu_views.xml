@@ -4,7 +4,7 @@
     <menuitem name="Hospital" id="hospital_menu_root" web_icon="hr_hospital,static/description/image2.png"/>
 
     <!-- menu categories -->
-    <menuitem name="Lists" id="hospital_lists_menu" parent="hospital_menu_root"/>
-    <menuitem name="Doctor info" id="hospital_doctor_info_menu" parent="hospital_menu_root"/>
+    <menuitem name="Doctor info" id="hospital_doctor_info_menu" parent="hospital_menu_root" sequence="100"/>
+    <menuitem name="Patient info" id="hospital_patient_info_menu" parent="hospital_menu_root" sequence="200"/>
     <menuitem name="Reports" id="hospital_report" parent="hospital_menu_root" sequence="2000"/>
 </odoo>
