@@ -19,7 +19,7 @@
         </field>
     </record>
 
-    <record id="hospital_report_disease_wizard_act_window" model="ir.actions.act_window">
+    <record id="hospital_report_disease_act" model="ir.actions.act_window">
         <field name="name">Hospital disease report for the month</field>
         <field name="type">ir.actions.act_window</field>
         <field name="res_model">hospital.report.disease.wizard</field>
@@ -27,11 +27,8 @@
         <field name="target">new</field>
     </record>
 
-    <menuitem id="hospital_report_disease_wizard_menu"
-              action="hospital_report_disease_wizard_act_window"
-              parent="hospital_report"
-              name="Hospital disease report for the month"
-              sequence="1800"/>
+    <menuitem id="hospital_report_disease_menu" action="hospital_report_disease_act" parent="hospital_report"
+              name="Hospital disease report for the month" sequence="100"/>
 
     <record id="hospital_report_disease_line_tree" model="ir.ui.view">
         <field name="name">hospital.report.disease.line.tree()</field>
@@ -39,8 +36,7 @@
         <field name="arch" type="xml">
             <tree default_order='disease_id, date, doctor_id'>
                 <field name="disease_id"/>
-                <field name="disease_count"
-                       attrs="{'invisible': [('disease_count', '==', 0)]}"/>
+                <field name="disease_count" attrs="{'invisible': [('disease_count', '==', 0)]}"/>
                 <field name="date"/>
                 <field name="doctor_id"/>
                 <field name="patient_id"/>

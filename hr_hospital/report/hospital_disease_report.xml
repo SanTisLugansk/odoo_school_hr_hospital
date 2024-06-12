@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+    <data>
+        <record id="action_disease_month_report" model="ir.actions.report">
+            <field name="name">Disease report for the month</field>
+            <field name="model">hospital.report.disease.line</field>
+            <field name="report_type">qweb-html</field>
+            <!--
+            <field name="report_type">qweb-pdf</field>
+            -->
+            <field name="report_name">hr_hospital.hospital_disease_report_template</field>
+            <field name="report_file">hr_hospital.hospital_disease_report</field>
+            <field name="print_report_name">'Disease report for the month - %s' % (object.name)</field>
+            <!--
+            <field name="print-report-name">'Disease report for %s' %(object.get_month_year)</field>
+            -->
+            <field name="binding_model_id" ref="model_hospital_disease"/>
+            <field name="binding_type">report</field>
+        </record>
+    </data>
+
+    <template id="hospital_disease_report_template">
+        <t t-call="web.html_container">
+            <t t-call="web.external_layout">
+                <div class="page">
+                    <div style="font-family: Arial; font-size: 14px;">
+                        <span>Disease report for the month</span>
+                    </div>
+                    <table class="table" style="width:90%; font-size:14px; border:2px solid black;">
+                        <thead stile="border:2px solid black;">
+                            <tr>
+                                <b>
+                                    <th class="align-center" stile="border-right:1px solid black;">Disease</th>
+                                    <th class="align-center" stile="border-left:1px solid black; border-right:1px solid black;">Quantity</th>
+                                    <th class="align-center" stile="border-left:1px solid black; border-right:1px solid black;">Date</th>
+                                    <th class="align-center" stile="border-left:1px solid black; border-right:1px solid black;">Doctor</th>
+                                    <th class="align-center" stile="border-left:1px solid black;">Patient</th>
+                                </b>
+                            </tr>
+                        </thead>
+                        <body>
+                            <tr stile="font-size:14px;">
+                                <td align="left" stile="border-right:1px solid black;">
+                                    <span t-esc="disease_id"/>
+                                </td>
+                                <td align="right" stile="border-left:1px solid black; border-right:1px solid black;">
+                                    <span t-esc="disease_count"/>
+                                </td>
+                                <td align="center" stile="border-left:1px solid black; border-right:1px solid black;">
+                                    <span t-esc="date"/>
+                                </td>
+                                <td align="left" stile="border-left:1px solid black; border-right:1px solid black;">
+                                    <span t-esc="doctor_id"/>
+                                </td>
+                                <td align="left" stile="border-left:1px solid black;">
+                                    <span t-esc="patient_id"/>
+                                </td>
+                            </tr>
+                        </body>
+                    </table>
+                </div>
+            </t>
+        </t>
+    </template>
+
+</odoo>
