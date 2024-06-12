@@ -21,10 +21,8 @@ class HospitalDoctor(models.Model):
                 raise ValidationError(_('You cannot install a mentor for a mentor ' + rec.name))
 
     def _is_intern(self):
-        for rec in self:
-            return bool(rec.mentor_id.id)
+        return bool(self.mentor_id.id)
 
     def _is_mentor(self):
-        for rec in self:
-            found_count = self.search_count([('mentor_id.id', '=', rec.id)])
-            return bool(found_count)
+        found_count = self.search_count([('mentor_id.id', '=', self.id)])
+        return bool(found_count)

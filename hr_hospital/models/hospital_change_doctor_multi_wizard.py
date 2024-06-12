@@ -2,11 +2,11 @@ from odoo import fields, models
 
 
 class HospitalChangeDoctorMultiWizard(models.TransientModel):
+    # Массове перевизначення персонального лікаря
     _name = 'hospital.change.doctor.multi.wizard'
     _description = 'Hospital wizard to change observing doctors'
 
-    patient_ids = fields.Many2many(comodel_name='hospital.patient',
-                                   string='Patients')
+    patient_ids = fields.Many2many(comodel_name='hospital.patient', string='Patients')
     doctor_id = fields.Many2one(comodel_name='hospital.doctor')
 
     def action_change_observing_doctor(self):

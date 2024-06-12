@@ -18,20 +18,20 @@
 
     # always loaded
     'data': ['security/ir.model.access.csv',
-             'views/hospital_menu_views.xml',
              'views/hospital_disease_views.xml',
              'views/hospital_doctor_views.xml',
              'views/hospital_patient_views.xml',
+             'views/hospital_menu_views.xml',
+             'views/hospital_diagnosis_views.xml',
              'views/hospital_patient_visit_views.xml',
              'views/hospital_doctor_change_views.xml',
-             'views/hospital_diagnosis_views.xml',
              'views/hospital_doctor_schedule_views.xml',
-             'data/disease_data.xml',
              'views/hospital_change_doctor_multi_wizard_views.xml',
+
              'views/hospital_report_disease_wizard_views.xml',
              'views/hospital_change_doctor_appointment_wizard.xml',
-             'views/hospital_fill_doctor_schedule_wizard_views.xml'
-
+             'views/hospital_fill_doctor_schedule_wizard_views.xml',
+             'data/disease_data.xml',
              ],
     # only loaded in demonstration mode
     'demo': ['demo/disease_demo.xml',

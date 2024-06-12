@@ -39,13 +39,13 @@ class HospitalPatient(models.Model):
     # @api.model
     @api.model_create_multi
     def create(self, vals_list):
-        res = super().create(vals_list)
-        for rec_res in res:
-            if rec_res.observing_doctor_id:
-                rec_res.write(dict(history_ids=[(0, 0, {'date': fields.datetime.now(),
-                                                        'doctor_id': rec_res.observing_doctor_id.id,
-                                                        'patient_id': rec_res.id})]))
-        return res
+        result = super().create(vals_list)
+        for rec in result:
+            if rec.observing_doctor_id:
+                rec.write(dict(history_ids=[(0, 0, {'date': fields.datetime.now(),
+                                                    'doctor_id': rec.observing_doctor_id.id,
+                                                    'patient_id': rec.id})]))
+        return result
 
     def hospital_change_doctor_multi_wizard_act_window(self):
         patient_ids = []

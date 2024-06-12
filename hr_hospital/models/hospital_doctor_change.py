@@ -2,6 +2,7 @@ from odoo import fields, models
 
 
 class HospitalDoctorChange(models.Model):
+    # Істрорія змін персонального лікаря
     _name = 'hospital.doctor.change'
     _description = 'Hospital Doctors Changes'
 
