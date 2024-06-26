@@ -9,9 +9,12 @@
             <!--
             <field name="report_type">qweb-pdf</field>
             -->
+            <!--
             <field name="report_name">hr_hospital.hospital_disease_report_template</field>
+            -->
+            <field name="report_name">hr_hospital.hospital_report_disease_wizard_form</field>
             <field name="report_file">hr_hospital.hospital_disease_report</field>
-            <field name="print_report_name">'Disease report for the month - %s' % (object.name)</field>
+            <field name="print_report_name">'Report: %s' % (object.name)</field>
             <!--
             <field name="print-report-name">'Disease report for %s' %(object.get_month_year)</field>
             -->
@@ -25,7 +28,7 @@
             <t t-call="web.external_layout">
                 <div class="page">
                     <div style="font-family: Arial; font-size: 14px;">
-                        <span>Disease report for the month</span>
+                        <span t-esc="name"/>
                     </div>
                     <table class="table" style="width:90%; font-size:14px; border:2px solid black;">
                         <thead stile="border:2px solid black;">

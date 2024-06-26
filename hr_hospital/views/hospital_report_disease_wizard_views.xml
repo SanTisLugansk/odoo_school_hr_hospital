@@ -1,20 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <record id="hospital_report_disease_wizard_form" model="ir.ui.view">
-        <field name="name">hospital.report.disease.wizard.form()</field>
+        <field name="name">hospital.report.disease.wizard.form</field>
         <field name="model">hospital.report.disease.wizard</field>
         <field name="arch" type="xml">
             <form>
                 <header></header>
                 <sheet>
+                    <group col="3">
+                        <group>
+                            <field name="date_month"/>
+                        </group>
+                        <group>
+                            <field name="detail_report"/>
+                        </group>
+                        <group>
+                            <button name="generate_report" type="object" string="generate report" colspan="2"/>
+                        </group>
+                    </group>
                     <group>
-                        <field name="date_month"/>
+                        <field name="name" style="font-size:18px; font-weight:bold" nolabel="1" colspan="2"/>
+                        <field name="report_lines_ids" nolabel="1" colspan="2">
+                            <tree default_order='disease_id, date, doctor_id' create="0" delete="0" edit="0">
+                                <field name="disease_id"/>
+                                <field name="disease_count" attrs="{'invisible': [('disease_count', '==', 0)]}"/>
+                                <field name="date"/>
+                                <field name="doctor_id"/>
+                                <field name="patient_id"/>
+                            </tree>
+                        </field>
                     </group>
                 </sheet>
-                <footer>
-                    <button name="generate_report" type="object" string="generate report"/>
-                    <button name="generate_report_detail" type="object" string="generate report detail"/>
-                </footer>
             </form>
         </field>
     </record>
@@ -24,12 +40,13 @@
         <field name="type">ir.actions.act_window</field>
         <field name="res_model">hospital.report.disease.wizard</field>
         <field name="view_mode">form</field>
-        <field name="target">new</field>
+        <field name="target">inline</field> <!-- inline new self current main -->
     </record>
 
     <menuitem id="hospital_report_disease_menu" action="hospital_report_disease_act" parent="hospital_report"
               name="Hospital disease report for the month" sequence="100"/>
 
+    <!--
     <record id="hospital_report_disease_line_tree" model="ir.ui.view">
         <field name="name">hospital.report.disease.line.tree()</field>
         <field name="model">hospital.report.disease.line</field>
@@ -43,5 +60,6 @@
             </tree>
         </field>
     </record>
+    -->
 
 </odoo>
