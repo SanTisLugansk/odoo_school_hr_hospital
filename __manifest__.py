@@ -1,5 +1,5 @@
 {
-    'name': "hospital",
+    'name': "Hospital",
     'summary': 'keeping records of doctors and users',
 
     'author': "O. Tischik",
@@ -39,4 +39,6 @@
     'demo': ['demo/disease_demo.xml',
              'demo/doctor_demo.xml',
              'demo/patient_demo.xml', ],
+
+    'images': ['static/description/icon.png'],
 }
