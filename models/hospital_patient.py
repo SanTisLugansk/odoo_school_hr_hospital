@@ -24,8 +24,7 @@ class HospitalPatient(models.Model):
             else:
                 today = fields.datetime.now()
                 rec.age = today.year - rec.date_of_birth.year
-                if rec.age > 0 and (rec.date_of_birth.month > today.month
-                                    or (rec.date_of_birth.month == today.month and rec.date_of_birth.day > today.day)):
+                if rec.age > 0 and (rec.date_of_birth.month > today.month or (rec.date_of_birth.month == today.month and rec.date_of_birth.day > today.day)):
                     rec.age -= 1
 
     def write(self, vals):

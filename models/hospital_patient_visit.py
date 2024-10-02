@@ -13,10 +13,8 @@ class HospitalPatientVisit(models.Model):
     date = fields.Datetime(readonly=False, states={'done': [('readonly', True)]})
     date_only = fields.Date(compute='_compute_date_only', readonly=True)
     doctor_id = fields.Many2one(comodel_name='hospital.doctor', readonly=False, states={'done': [('readonly', True)]})
-    diagnosis_ids = fields.Many2many(comodel_name='hospital.diagnosis',
-                                     domain="[('doctor_id', '=', doctor_id), ('patient_id', '=', patient_id)]")
-    schedule = fields.Many2one(comodel_name='hospital.doctor.schedule',
-                               domain="[('doctor_id', '=', doctor_id), ('date', '=', date_only)]")
+    diagnosis_ids = fields.Many2many(comodel_name='hospital.diagnosis', domain="[('doctor_id', '=', doctor_id), ('patient_id', '=', patient_id)]")
+    schedule = fields.Many2one(comodel_name='hospital.doctor.schedule', domain="[('doctor_id', '=', doctor_id), ('date', '=', date_only)]")
 
     def name_get(self):
         return [(rec.id, f'patient: {rec.patient_id.name}  at {rec.date}  doctor: {rec.doctor_id.name}') for rec in self]
@@ -24,8 +22,7 @@ class HospitalPatientVisit(models.Model):
     @api.model
     def cron_done(self):
         # ця процедура автоматично виконується кожної години (Settings / Technical / Automation / Scheduled Actions)
-        found_sp = self.search([('date', '<', fields.datetime.now()),
-                                ('state', '!=', 'done')])
+        found_sp = self.search([('date', '<', fields.datetime.now()), ('state', '!=', 'done')])
         # for rec in found_sp:
         #    print('rec.date = ', rec.date)
         found_sp.write({'state': 'done'})
@@ -58,7 +55,7 @@ class HospitalPatientVisit(models.Model):
     def _ondelete_patient_visit(self):
         for rec in self:
             if len(rec.diagnosis_ids) > 0:
-                raise ValidationError(_('You cannot delete a visit with a diagnosis'))
+                raise ValidationError(_("You cannot delete a visit with a diagnosis"))
 
     def hospital_change_appointment_wizard_act_window(self):
         # patient_ids = []

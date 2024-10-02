@@ -9,6 +9,7 @@
                 <field name="doctor_id"/>
                 <field name="date"/>
                 <field name="state"/>
+                <field name="active" invisible="1" readonly="1"/>
             </tree>
         </field>
     </record>
@@ -35,6 +36,7 @@
                         <field name="state" readonly="1"/>
                         <field name="diagnosis_ids"/>
                         <field name="date_only"/>
+                        <field name="active" invisible="1" readonly="1"/>
                     </group>
                 </sheet>
             </form>
