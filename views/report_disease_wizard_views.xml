@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <record id="hospital_report_disease_wizard_form" model="ir.ui.view">
-        <field name="name">hospital.report.disease.wizard.form</field>
-        <field name="model">hospital.report.disease.wizard</field>
+    <record id="report_disease_wizard_form" model="ir.ui.view">
+        <field name="name">report.disease.wizard.form</field>
+        <field name="model">report.disease.wizard</field>
         <field name="arch" type="xml">
             <form>
                 <header></header>
@@ -20,6 +20,7 @@
                     </group>
                     <group>
                         <field name="name" style="font-size:18px; font-weight:bold" nolabel="1" colspan="2"/>
+                        <!--
                         <field name="report_lines_ids" nolabel="1" colspan="2">
                             <tree default_order='disease_id, date, doctor_id' create="0" delete="0" edit="0">
                                 <field name="disease_id"/>
@@ -29,37 +30,34 @@
                                 <field name="patient_id"/>
                             </tree>
                         </field>
+                        -->
                     </group>
                 </sheet>
+                <footer>
+                    <button name="generate_report" string="Print report" type="object" class="btn-primary"/>
+                    <button string="Cancel" class="btn-secondary" special="cancel"/>
+                </footer>
             </form>
         </field>
     </record>
 
-    <record id="hospital_report_disease_act" model="ir.actions.act_window">
-        <field name="name">Hospital disease report for the month</field>
-        <field name="type">ir.actions.act_window</field>
-        <field name="res_model">hospital.report.disease.wizard</field>
-        <field name="view_mode">form</field>
-        <field name="target">inline</field> <!-- inline new self current main -->
-    </record>
-
-    <menuitem id="hospital_report_disease_menu" action="hospital_report_disease_act" parent="hospital_report"
-              name="Hospital disease report for the month" sequence="100"/>
-
-    <!--
-    <record id="hospital_report_disease_line_tree" model="ir.ui.view">
-        <field name="name">hospital.report.disease.line.tree()</field>
-        <field name="model">hospital.report.disease.line</field>
-        <field name="arch" type="xml">
-            <tree default_order='disease_id, date, doctor_id'>
-                <field name="disease_id"/>
-                <field name="disease_count" attrs="{'invisible': [('disease_count', '==', 0)]}"/>
-                <field name="date"/>
-                <field name="doctor_id"/>
-                <field name="patient_id"/>
-            </tree>
+    <record id="action_server_print_disease_report" model="ir.actions.server">
+        <field name="name">Disease Report</field>
+        <field name="model_id" ref="model_report_disease_wizard"/>
+        <field name="binding_model_id" ref="model_hospital_doctor"/>  <!-- Модель для прив'язки -->
+        <field name="binding_type">report</field>  <!-- Додавання до меню "Друк" -->
+        <field name="state">code</field>
+        <field name="code">action = {'type': 'ir.actions.act_window',
+                                     'res_model': 'report.disease.wizard',
+                                     'view_mode': 'form',
+                                     'target': 'inline', }    <!-- inline new self current main -->
         </field>
     </record>
+
+
+    <!--
+    <menuitem id="hospital_report_disease_menu" action="action_report_disease_wizard" parent="hospital_report"
+              name="Hospital disease report for the month" sequence="100"/>
     -->
 
 </odoo>

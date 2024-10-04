@@ -27,13 +27,12 @@
              'views/hospital_doctor_change_views.xml',
              'views/hospital_doctor_schedule_views.xml',
              'views/hospital_change_doctor_multi_wizard_views.xml',
-
-             'views/hospital_report_disease_wizard_views.xml',
+             'views/report_disease_wizard_views.xml',
              'views/hospital_change_doctor_appointment_wizard.xml',
              'views/hospital_fill_doctor_schedule_wizard_views.xml',
 
              'data/disease_data.xml',
-             'report/hospital_disease_report.xml',
+             'report/report_disease.xml',
              ],
     # only loaded in demonstration mode
     'demo': ['demo/disease_demo.xml',

@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+    <template id="report_disease_template">
+        <t t-call="web.html_container">
+            <t t-call="web.external_layout">
+                <div class="page">
+                    <div style="font-family: Arial; font-size: 14px;">
+                        <span t-esc="data['report_name']"/>
+                    </div>
+                    <table class="table" style="width:90%; font-size:14px; border:2px solid black;">
+                        <thead stile="border:2px solid black;">
+                            <tr>
+                                <b>
+                                    <t t-if="data['detail_report']">
+                                        <th class="align-center" stile="border-right:1px solid black;">Disease</th>
+                                        <th class="align-center" stile="border-left:1px solid black; border-right:1px solid black;">Date</th>
+                                        <th class="align-center" stile="border-left:1px solid black; border-right:1px solid black;">Doctor</th>
+                                        <th class="align-center" stile="border-left:1px solid black;">Patient</th>
+                                    </t>
+                                    <t t-else="">
+                                        <th class="align-center" stile="border-right:1px solid black;">Disease</th>
+                                        <th class="align-center" stile="border-left:1px solid black; border-right:1px solid black;">Quantity</th>
+                                    </t>
+                                </b>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <t t-foreach="docs" t-as="disease">
+                                <tr stile="font-size:14px;">
+                                    <t t-if="data['detail_report']">
+                                        <td align="left" stile="border-right:1px solid black;">
+                                            <span t-esc="disease['disease_id'].display_name"/>
+                                        </td>
+                                        <td align="center" stile="border-left:1px solid black; border-right:1px solid black;">
+                                            <span t-esc="disease['date']"/>
+                                        </td>
+                                        <td align="left" stile="border-left:1px solid black; border-right:1px solid black;">
+                                            <span t-esc="disease['doctor_id'].display_name"/>
+                                        </td>
+                                        <td align="left" stile="border-left:1px solid black;">
+                                            <span t-esc="disease['patient_id'].display_name"/>
+                                        </td>
+                                    </t>
+                                    <t t-else="">
+                                        <td align="left" stile="border-right:1px solid black;">
+                                            <span t-esc="disease['disease_id'].display_name"/>
+                                        </td>
+                                        <td align="right" stile="border-left:1px solid black; border-right:1px solid black;">
+                                            <span t-esc="disease['disease_count']"/>
+                                        </td>
+                                    </t>
+                                </tr>
+                            </t>
+                        </tbody>
+                    </table>
+                </div>
+            </t>
+        </t>
+    </template>
+
+    <record id="action_report_disease" model="ir.actions.report">
+        <field name="name">action report Disease report for the month</field>
+        <field name="model">report.disease</field>
+        <field name="report_type">qweb-html</field>       <!--   <field name="report_type">qweb-pdf</field>    -->
+        <field name="report_name">odoo_school_hr_hospital.report_disease_template</field>
+        <field name="report_file">odoo_school_hr_hospital.report_disease_template</field>
+        <!--
+        <field name="print_report_name">'Report: %s' % (object.name)</field>
+        <field name="print-report-name">'Disease report for %s' %(object.get_month_year)</field>
+        -->
+        <field name="binding_model_id" eval="False"/>  <!-- Цей параметр прибирає звіт з меню 'Друк' -->
+    </record>
+
+</odoo>
