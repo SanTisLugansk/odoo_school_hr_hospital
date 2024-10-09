@@ -13,7 +13,7 @@ class ReportDiseaseWizard(models.TransientModel):
     date_month = fields.Date(string='month from date')
     detail_report = fields.Boolean(string='Detail')
 
-    @api.depends('date_month')
+    @api.depends('date_month', 'detail_report')
     def _compute_name(self):
         self.name = _('Diseases during the period ')
         if self.date_month is not False:
@@ -27,11 +27,11 @@ class ReportDiseaseWizard(models.TransientModel):
                 'date_end': date_utils.end_of(self.date_month, "month"),
                 'report_name': self.name,
                 'detail_report': self.detail_report}
-        return self.env.ref('odoo_school_hr_hospital.action_report_disease').report_action(self, data)
+        return self.env.ref('hospital.action_report_disease').report_action(self, data)
 
 
-class ReportDisease(models.AbstractModel):
-    _name = 'report.odoo_school_hr_hospital.report_disease_template'
+class ReportHospitalDisease_template(models.AbstractModel):
+    _name = 'report.hospital.disease_template'
 
     @api.model
     def _get_report_values(self, docids, data=None):
@@ -65,6 +65,12 @@ class ReportDisease(models.AbstractModel):
                                 # 'disease_count': record['__count']})
                                 'disease_count': id_count})
         return {'doc_ids': docids,
-                'doc_model': 'report.disease',
+                'doc_model': 'report.hospital.disease_template',    #   'doc_model': 'report.disease',
                 'docs': results,
                 'data': data, }
+
+    # def get_report_file_name(self, data=False):
+    #     if data is False:
+    #         return 'report'
+    #     else:
+    #         return data.report_name
