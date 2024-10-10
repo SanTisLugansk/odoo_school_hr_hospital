@@ -33,7 +33,7 @@
                                             <span t-esc="disease['disease_id'].display_name"/>
                                         </td>
                                         <td align="center" stile="border-left:1px solid black; border-right:1px solid black;">
-                                            <span t-esc="disease['date']"/>
+                                            <span t-esc="disease['date'].strftime('%d.%m.%Y')"/>    <!--    <span t-esc="disease['date']"/>     -->
                                         </td>
                                         <td align="left" stile="border-left:1px solid black; border-right:1px solid black;">
                                             <span t-esc="disease['doctor_id'].display_name"/>
@@ -61,12 +61,12 @@
 
     <record id="action_report_disease" model="ir.actions.report">
         <field name="name">action report Disease report for the month</field>
-        <field name="model">report.hospital.disease_template</field>    <!--    <field name="model">report.disease</field>  -->
+        <field name="model">report.hospital.disease_template</field>
         <field name="report_type">qweb-pdf</field>      <!--    qweb-pdf       qweb-html    -->
         <field name="report_name">hospital.disease_template</field>
         <field name="report_file">hospital.disease_template</field>
-        <field name="binding_model_id" ref="model_hospital_doctor"/>
-  <!--      <field name="binding_model_id" eval="False"/>   Цей параметр прибирає звіт з меню 'Друк' -->
+        <field name="print_report_name">'%s' % (object.report_name)</field>
+        <field name="binding_model_id" eval="False"/>   <!--    Цей параметр прибирає звіт з меню 'Друк' -->
     </record>
 
 </odoo>
