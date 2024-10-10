@@ -54,10 +54,17 @@
         </field>
     </record>
 
+    <record id="action_report_disease_wizard" model="ir.actions.act_window">
+        <field name="name">Disease Report Wizard</field>
+        <field name="res_model">report.disease.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>  <!-- inline new self current main -->
+    </record>
 
-    <!--
-    <menuitem id="hospital_report_disease_menu" action="action_report_disease_wizard" parent="hospital_report"
-              name="Hospital disease report for the month" sequence="100"/>
-    -->
+    <menuitem id="menu_report_disease_wizard"
+              name="Hospital disease report for the month"
+              parent="hospital_report"
+              action="action_report_disease_wizard"
+              sequence="100"/>
 
 </odoo>
