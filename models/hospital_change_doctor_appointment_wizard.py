@@ -23,8 +23,7 @@ class HospitalChangeDoctorAppointmentWizard(models.TransientModel):
             if rec.visit_id.state == 'done':
                 raise ValidationError(_('The visit to the doctor has already take, changes are not possible'))
 
-            schedule_count = self.env['hospital.patient.visit'].sudo().\
-                search_count([('schedule', '=', rec.schedule_id.id)])
+            schedule_count = self.env['hospital.patient.visit'].sudo().search_count([('schedule', '=', rec.schedule_id.id)])
             if schedule_count > 0:
                 raise ValidationError(_('This time is already taken'))
 

@@ -1,3 +1,5 @@
+from datetime import datetime, time, timedelta
+from pytz import timezone, utc
 from odoo import _, api, fields, models
 from odoo.exceptions import ValidationError
 
@@ -7,6 +9,7 @@ class HospitalPatientVisit(models.Model):
     _name = 'hospital.patient.visit'
     _description = 'Hospital Patient Visit'
 
+
     state = fields.Selection(selection=[('done', 'Done'), ('draft', 'Draft')], default='draft', required=True)
     active = fields.Boolean(default=True)
     patient_id = fields.Many2one(comodel_name='hospital.patient', readonly=False, states={'done': [('readonly', True)]})
@@ -14,7 +17,9 @@ class HospitalPatientVisit(models.Model):
     date_only = fields.Date(compute='_compute_date_only', readonly=True)
     doctor_id = fields.Many2one(comodel_name='hospital.doctor', readonly=False, states={'done': [('readonly', True)]})
     diagnosis_ids = fields.Many2many(comodel_name='hospital.diagnosis', domain="[('doctor_id', '=', doctor_id), ('patient_id', '=', patient_id)]")
-    schedule = fields.Many2one(comodel_name='hospital.doctor.schedule', domain="[('doctor_id', '=', doctor_id), ('date', '=', date_only)]")
+    schedule = fields.Many2one(comodel_name='hospital.doctor.schedule',
+                               # domain="[('doctor_id', '=', doctor_id), ('date', '=', date_only)]")
+                                domain="[('doctor_id', '=', doctor_id)]")
 
     def name_get(self):
         return [(rec.id, f'patient: {rec.patient_id.name}  at {rec.date}  doctor: {rec.doctor_id.name}') for rec in self]
@@ -40,10 +45,34 @@ class HospitalPatientVisit(models.Model):
     def _set_done(self):
         self.cron_done()
 
+
+    # @api.onchange('date_only')
+    # def _onchange_date_only(self):
+    #     if self.date_only:
+    #         # Якщо дата вибрана, фільтруємо розклад за цією датою
+    #         return {'domain': {'schedule': [('date', '=', self.date_only)]}}
+    #     else:
+    #         # Якщо дата не вибрана, очищуємо домен, показуючи всі записи
+    #         return {'domain': {'schedule': []}}
+
+
+    @api.onchange('schedule', 'date')
+    def _set_date(self):
+        user_tz = timezone(self.env.user.tz)
+        if not self.date is False:
+            local_date = self.date.astimezone(user_tz)
+        if self.schedule.date and (self.date is False or local_date.date() != self.schedule.date or local_date.hour != self.schedule.hour):
+            local_date = user_tz.localize(datetime.combine(self.schedule.date, time(self.schedule.hour, 0, 0)))
+            date_in_utc = local_date.astimezone(utc)
+            self.date = date_in_utc.replace(tzinfo=None)
+
     @api.depends('date')
     def _compute_date_only(self):
         for rec in self:
-            rec.date_only = fields.Date.to_date(rec.date)
+            if rec.date:
+                rec.date_only = fields.Date.to_date(rec.date)
+            else:
+                rec.date_only = False
 
     @api.constrains('active')
     def _constrains_date(self):
