@@ -26,18 +26,26 @@
                 <!--    <button name="visit_history" type="object" string="visit history"/>     -->
                 </header>
                 <sheet>
-                    <group>
-                        <field name="name"/>
-                        <field name="phone"/>
-                        <field name="email"/>
-                        <field name="gender"/>
+                    <group col="6">
+                        <group colspan="2">
+                            <field name="name" colspan="1"/>
+                            <field name="phone" colspan="1"/>
+                            <field name="email" colspan="1"/>
+                            <field name="gender" colspan="1"/>
+                        </group>
+                        <group colspan="2">
+                            <field name="photo" widget="image" options='{"size": [300, 300], "preview": true}' colspan="1"/>
+                        </group>
+                        <group colspan="2">
+                            <field name="date_of_birth" colspan="1"/>
+                            <field name="age" colspan="1"/>
+                        </group>
+                    </group>
+                    <group colspan="3">
                         <field name="passport_data"/>
                         <field name="contact_person_ids" widget="many2many_tags"/>
-                        <field name="photo" widget="image"/>
                         <field name="observing_doctor_id"/>
-                        <field name="date_of_birth"/>
-                        <field name="age"/>
-                        <field name="doctor_change_ids"/>
+                        <field name="doctor_history_ids"/>
                         <field name="diagnosis_ids"/>
                     </group>
                 </sheet>

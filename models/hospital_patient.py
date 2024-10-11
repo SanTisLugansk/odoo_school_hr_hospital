@@ -9,11 +9,10 @@ class HospitalPatient(models.Model):
 
     date_of_birth = fields.Date()
     age = fields.Integer(compute='_compute_age')
-    passport_data = fields.Text()
+    passport_data = fields.Char(size=300)
     contact_person_ids = fields.Many2many(comodel_name='hospital.contact.person')
     observing_doctor_id = fields.Many2one(comodel_name='hospital.doctor')
-    history_ids = fields.One2many(comodel_name='hospital.doctor.change', inverse_name='patient_id')
-    doctor_change_ids = fields.One2many(comodel_name='hospital.doctor.change', inverse_name='patient_id')
+    doctor_history_ids = fields.One2many(comodel_name='hospital.doctor.change', inverse_name='patient_id')
     diagnosis_ids = fields.One2many(comodel_name='hospital.diagnosis', inverse_name='patient_id')
 
     @api.depends('date_of_birth')
@@ -30,7 +29,7 @@ class HospitalPatient(models.Model):
     def write(self, vals):
         if 'observing_doctor_id' in vals:
             for rec in self:
-                rec.write({'history_ids': [(0, 0, {'date': fields.datetime.now(),
+                rec.write({'doctor_history_ids': [(0, 0, {'date': fields.datetime.now(),
                                                    'doctor_id': vals['observing_doctor_id'],
                                                    'patient_id': rec.id})]})
         return super().write(vals)
@@ -41,7 +40,7 @@ class HospitalPatient(models.Model):
         result = super().create(vals_list)
         for rec in result:
             if rec.observing_doctor_id:
-                rec.write(dict(history_ids=[(0, 0, {'date': fields.datetime.now(),
+                rec.write(dict(doctor_history_ids=[(0, 0, {'date': fields.datetime.now(),
                                                     'doctor_id': rec.observing_doctor_id.id,
                                                     'patient_id': rec.id})]))
         return result
