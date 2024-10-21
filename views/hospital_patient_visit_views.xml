@@ -31,10 +31,11 @@
                     <group>
                         <field name="patient_id"/>
                         <field name="doctor_id"/>
-                        <field name="date"/>
+                        <field name="date" widget="datetime"/>
                         <field name="schedule"/>      <!--      -->
                         <field name="state" readonly="1"/>
-                        <field name="diagnosis_ids"/>
+                        <field name="diagnosis_is_editable" invisible="1"/>
+                        <field name="diagnosis_ids" attrs="{'readonly': [('diagnosis_is_editable', '=', False)]}" context="{'visit_readonly': True}"/>
                         <field name="active" invisible="1" readonly="1"/>
                     </group>
                 </sheet>
@@ -47,6 +48,14 @@
         <field name="type">ir.actions.act_window</field>
         <field name="res_model">hospital.patient.visit</field>
         <field name="view_mode">tree,form</field>
+    </record>
+
+    <record id="action_hospital_visit_history" model="ir.actions.act_window">
+        <field name="name">Patient Visit</field>
+        <field name="res_model">hospital.patient.visit</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[('patient_id', '=', patient_id)]</field>
+        <field name="context">{'default_patient_id': patient_id}</field>
     </record>
 
     <menuitem id="hospital_patient_visit_menu" action="hospital_patient_visit_act_window" parent="hospital_patient_info_menu" name="Patient visit" sequence="200"/>

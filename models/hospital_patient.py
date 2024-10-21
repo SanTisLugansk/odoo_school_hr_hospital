@@ -30,8 +30,8 @@ class HospitalPatient(models.Model):
         if 'observing_doctor_id' in vals:
             for rec in self:
                 rec.write({'doctor_history_ids': [(0, 0, {'date': fields.datetime.now(),
-                                                   'doctor_id': vals['observing_doctor_id'],
-                                                   'patient_id': rec.id})]})
+                                                          'doctor_id': vals['observing_doctor_id'],
+                                                          'patient_id': rec.id})]})
         return super().write(vals)
 
     # @api.model
@@ -41,8 +41,8 @@ class HospitalPatient(models.Model):
         for rec in result:
             if rec.observing_doctor_id:
                 rec.write(dict(doctor_history_ids=[(0, 0, {'date': fields.datetime.now(),
-                                                    'doctor_id': rec.observing_doctor_id.id,
-                                                    'patient_id': rec.id})]))
+                                                           'doctor_id': rec.observing_doctor_id.id,
+                                                           'patient_id': rec.id})]))
         return result
 
     def hospital_change_doctor_multi(self):

@@ -1,26 +1,63 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <record id="hospital_diagnosis_tree" model="ir.ui.view">
-        <field name="name">hospital.diagnosis.tree()</field>
+        <field name="name">hospital.diagnosis.tree</field>
         <field name="model">hospital.diagnosis</field>
         <field name="arch" type="xml">
             <tree>
-                <field name="patient_id"/>
-                <field name="doctor_id"/>
+                <field name="visit_id"/>
+                <!-- <field name="patient_id"/>
+                    <field name="doctor_id"/>   -->
                 <field name="disease_ids" widget="many2many_tags"/>
                 <field name="date"/>
             </tree>
         </field>
     </record>
 
+    <record id="hospital_diagnosis_appointment_for_treatment_tree" model="ir.ui.view">
+        <field name="name">hospital.diagnosis.appointment.for.treatment.tree</field>
+        <field name="model">hospital.diagnosis</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="date"/>
+                <field name="appointment"/>
+                <field name="doctor_id"/>
+            </tree>
+        </field>
+    </record>
+
+<!--
+    <record id="hospital_diagnosis_disease_patient_tree" model="ir.ui.view">
+        <field name="name">hospital.diagnosis.disease.patient.tree</field>
+        <field name="model">hospital.diagnosis</field>
+        <field name="arch" type="xml">
+            <tree create="false" edit="false" delete="false">
+                <field name="date"/>
+                <field name="patient_id" invisible="1"/>
+                <field name="disease_ids" widget="many2many_tags"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="action_hospital_disease_patient" model="ir.actions.act_window">
+        <field name="name">hospital.disease.patient.tree</field>
+        <field name="res_model">hospital.diagnosis</field>
+        <field name="view_mode">tree</field>
+        <field name="view_id" ref="hospital_diagnosis_disease_patient_tree"/>
+        <field name="domain">[('patient_id', '=', patient_id)]</field>
+    </record>
+-->
+
     <record id="hospital_diagnosis_form" model="ir.ui.view">
-        <field name="name">hospital.diagnosis.form()</field>
+        <field name="name">hospital.diagnosis.form</field>
         <field name="model">hospital.diagnosis</field>
         <field name="arch" type="xml">
             <form>
                 <header></header>
                 <sheet>
                     <group>
+                        <field name="visit_readonly" invisible="1"/>
+                        <field name="visit_id" attrs="{'readonly': [('visit_readonly', '=', True)]}"/>
                         <field name="patient_id"/>
                         <field name="doctor_id"/>
                         <field name="date"/>
@@ -31,6 +68,14 @@
                 </sheet>
             </form>
         </field>
+    </record>
+
+    <record id="action_hospital_diagnosis_appointment_for_treatment_history" model="ir.actions.act_window">
+        <field name="name">Appointment for treatment history</field>
+        <field name="res_model">hospital.diagnosis</field>
+        <field name="view_mode">tree</field>
+        <field name="views">[(5, 0, 0), (ref('hospital_diagnosis_appointment_for_treatment_tree'), 'tree'),]</field>
+        <field name="domain">[('patient_id', '=', patient_id)]</field>
     </record>
 
     <record id="hospital_diagnosis_act_window" model="ir.actions.act_window">

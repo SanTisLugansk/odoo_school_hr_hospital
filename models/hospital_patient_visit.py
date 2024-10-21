@@ -13,12 +13,44 @@ class HospitalPatientVisit(models.Model):
     active = fields.Boolean(default=True)
     patient_id = fields.Many2one(comodel_name='hospital.patient', readonly=False, states={'done': [('readonly', True)]})
     date = fields.Datetime(readonly=False, states={'done': [('readonly', True)]})
-    doctor_id = fields.Many2one(comodel_name='hospital.doctor', readonly=False, states={'done': [('readonly', True)]})
-    diagnosis_ids = fields.Many2many(comodel_name='hospital.diagnosis', domain="[('doctor_id', '=', doctor_id), ('patient_id', '=', patient_id)]")
-    schedule = fields.Many2one(comodel_name='hospital.doctor.schedule', domain="[('doctor_id', '=', doctor_id)]")
+    doctor_id = fields.Many2one(comodel_name='hospital.doctor', compute='_compute_doctor_id', inverse='_inverse_doctor_id')
+    diagnosis_ids = fields.One2many(comodel_name='hospital.diagnosis', inverse_name='visit_id',
+                                     # domain="[('doctor_id', '=', doctor_id), ('patient_id', '=', patient_id)]")
+                                     )
+    diagnosis_is_editable = fields.Boolean(compute='_compute_diagnosis_is_editable')
+    schedule = fields.Many2one(comodel_name='hospital.doctor.schedule', readonly=False, states={'done': [('readonly', True)]})
 
     def name_get(self):
         return [(rec.id, f'patient: {rec.patient_id.name}  at {rec.date}  doctor: {rec.doctor_id.name}') for rec in self]
+
+    @api.depends('date')
+    def _compute_diagnosis_is_editable(self):
+        for rec in self:
+            if rec.date and rec.date <= datetime.now():
+                rec.diagnosis_is_editable = True
+            else:
+                rec.diagnosis_is_editable = False
+
+    @api.depends('schedule')
+    def _compute_doctor_id(self):
+        for rec in self:
+            rec.doctor_id = rec.schedule.doctor_id
+
+    @api.depends('doctor_id')
+    def _inverse_doctor_id(self):
+        for rec in self:
+            if rec.doctor_id != rec.schedule.doctor_id:
+                rec.schedule = False
+            rec._set_domain()
+
+    def _set_domain(self):
+        if self.date and self.doctor_id:
+            return {"domain": {'schedule': [('doctor_id', '=', self.doctor_id.id), ('date', '=', self.date.date())]}}
+        if self.date:
+            return {"domain": {'schedule': [('date', '=', self.date.date())]}}
+        if self.doctor_id:
+            return {"domain": {'schedule': [('doctor_id', '=', self.doctor_id.id)]}}
+        return {"domain": {'schedule': []}}
 
     @api.model
     def cron_done(self):
@@ -44,10 +76,7 @@ class HospitalPatientVisit(models.Model):
     @api.onchange('date')
     def _onchange_date(self):
         for rec in self:
-            if rec.date:
-                # Якщо дата вибрана, фільтруємо розклад за цією датою
-                return {"domain": {'schedule': [('doctor_id', '=', rec.doctor_id.id), ('date', '=', rec.date.date())]}}
-            return {"domain": {'schedule': [('doctor_id', '=', rec.doctor_id.id)]}}
+            rec._set_domain()
 
     @api.onchange('schedule', 'date')
     def _set_date(self):
@@ -70,6 +99,8 @@ class HospitalPatientVisit(models.Model):
         for rec in self:
             if len(rec.diagnosis_ids) > 0:
                 raise ValidationError(_("You cannot delete a visit with a diagnosis"))
+            if self.state == 'done' and (not rec.active):
+                raise ValidationError(_('You cannot delete a visit that has already taken place'))
 
     def hospital_change_appointment_wizard_act_window(self):
         # patient_ids = []

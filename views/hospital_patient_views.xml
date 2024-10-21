@@ -18,12 +18,19 @@
     </record>
 
     <record id="hospital_patient_form" model="ir.ui.view">
-        <field name="name">hospital.patient.form()</field>
+        <field name="name">hospital.patient.form</field>
         <field name="model">hospital.patient</field>
         <field name="arch" type="xml">
             <form>
                 <header>
-                <!--    <button name="visit_history" type="object" string="visit history"/>     -->
+                    <field name="id" invisible="1"/>
+                    <!--
+                    name in next line start with "%(
+                    <button name=action_hospital_disease_patient)d" string="Show Diseases" type="action" context="{'patient_id': id}" class="btn-primary"/>
+                    -->
+                    <button name="%(action_hospital_visit_history)d" string="visit history" type="action" context="{'patient_id': id}" class="btn-primary"/>
+                    <button name="%(action_hospital_diagnosis_appointment_for_treatment_history)d"
+                            string="Appointment for treatment history" type="action" context="{'patient_id': id}" class="btn-primary"/>
                 </header>
                 <sheet>
                     <group col="6">
@@ -41,12 +48,23 @@
                             <field name="age" colspan="1"/>
                         </group>
                     </group>
-                    <group colspan="3">
-                        <field name="passport_data"/>
-                        <field name="contact_person_ids" widget="many2many_tags"/>
-                        <field name="observing_doctor_id"/>
-                        <field name="doctor_history_ids"/>
-                        <field name="diagnosis_ids"/>
+                    <group>
+                        <field name="passport_data" style="width:50%; display:inline-block;"/>
+                        <field name="contact_person_ids" widget="many2many_tags" style="width:50%; display:inline-block;"/>
+                        <field name="observing_doctor_id" style="width:50%; display:inline-block;"/>
+                        <field name="doctor_history_ids" style="width:50%; display:inline-block;">
+                            <tree create="false" edit="false" delete="false">
+                                <field name="date" width="30%"/>
+                                <field name="doctor_id" width="70%"/>
+                            </tree>
+                        </field>
+                        <field name="diagnosis_ids" string="Diseases">
+                            <tree create="false" edit="false" delete="false">
+                                <field name="date"/>
+                                <field name="disease_ids" widget="many2many_tags"/>
+                                <field name="doctor_id"/>
+                            </tree>
+                        </field>
                     </group>
                 </sheet>
             </form>
