@@ -35,6 +35,7 @@ class ReportDiseaseWizard(models.TransientModel):
 
 class ReportHospitalDisease(models.AbstractModel):
     _name = 'report.hospital.disease_template'
+    _description = 'Report disease for the month'
 
     @api.model
     def _get_report_values(self, docids, data=None):

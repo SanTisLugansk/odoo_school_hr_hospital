@@ -21,7 +21,8 @@
             <tree>
                 <field name="date"/>
                 <field name="appointment"/>
-                <field name="doctor_id"/>
+                <field name="disease_ids" widget="many2many_tags" optional="hide"/>
+                <field name="doctor_id" optional="show"/>
             </tree>
         </field>
     </record>

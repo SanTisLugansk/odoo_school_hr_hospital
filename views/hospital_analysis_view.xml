@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="hospital_analysis_tree" model="ir.ui.view">
+        <field name="name">hospital.analysis.tree</field>
+        <field name="model">hospital.analysis</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="patient_id"/>
+                <field name="date_referral"/>
+                <field name="doctor_referral_id"/>
+                <field name="type"/>
+                <field name="date_passing"/>
+                <field name="doctor_who_did_id"/>
+                <field name="indicator_value_ids" widget="many2many_tags"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="hospital_analysis_form" model="ir.ui.view">
+        <field name="name">hospital.analysis.form</field>
+        <field name="model">hospital.analysis</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <!--
+                    <field name="state" widget="statusbar" statusbar_visible="plan,done" options="{'clickable': '1'}" attrs="{'invisible': [('state', 'in', ('sold','canceled'))]}"/>
+                    -->
+                    <field name="state" widget="statusbar" statusbar_visible="plan,done" options="{'clickable': '1'}"/>
+                </header>
+                <sheet>
+                    <group>
+                        <field name="patient_id"/>
+                    </group>
+                    <group col="11">
+                        <group colspan="3">
+                            <field name="type"/>
+                        </group>
+                        <group colspan="3">
+                            <field name="date_referral"/>
+                        </group>
+                        <group colspan="5">
+                            <field name="doctor_referral_id"/>
+                        </group>
+                    </group>
+                    <group col="10">
+                        <group colspan="3">
+                            <field name="date_passing"/>
+                        </group>
+                        <group colspan="2">
+                            <label for="doctor_who_did_id" colspan="2" style="white-space: nowrap;"/>
+                        </group>
+                        <div colspan="5">
+                            <field name="doctor_who_did_id"/>
+                        </div>
+                        <!--
+                        <group no_label="1" colspan="5">
+                            <field name="doctor_who_did_id"/>
+                        </group>
+                        -->
+                    </group>
+                    <group>
+                        <field name="indicator_value_ids" attrs="{'readonly': ['|', ('date_passing', '=', False), ('doctor_who_did_id', '=', False)]}"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="hospital_analysis_patient_act_window" model="ir.actions.act_window">
+        <field name="name">Analysis</field>
+        <field name="res_model">hospital.analysis</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem id="hospital_analysis_patient_menu" action="hospital_analysis_patient_act_window" parent="hospital_patient_info_menu" name="Analysis" sequence="300"/>
+
+    <record id="action_hospital_analysis_history" model="ir.actions.act_window">
+        <field name="name">Patient Analysis</field>
+        <field name="res_model">hospital.analysis</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[('patient_id', '=', patient_id)]</field>
+        <field name="context">{'default_patient_id': patient_id}</field>
+    </record>
+
+    <record id="hospital_analysis_indicator_tree" model="ir.ui.view">
+        <field name="name">hospital.analysis.indicator.tree</field>
+        <field name="model">hospital.analysis.indicator</field>
+        <field name="arch" type="xml">
+            <tree editable='bottom'>
+                <field name="name" width="50%"/>
+                <field name="limit_lower" options="{'digits': 3}" width="25%"/>
+                <field name="limit_upper" options="{'digits': 3}" width="25%"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="hospital_analysis_act_window" model="ir.actions.act_window">
+        <field name="name">Analysis</field>
+        <field name="res_model">hospital.analysis</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <record id="hospital_analysis_indicator_act_window" model="ir.actions.act_window">
+        <field name="name">Analysis indicator</field>
+        <field name="res_model">hospital.analysis.indicator</field>
+        <field name="view_mode">tree</field>
+    </record>
+
+    <menuitem id="hospital_analysis_root_menu" parent="hospital_menu_root" name="Analysis" sequence="400"/>
+    <menuitem id="hospital_analysis_menu" action="hospital_analysis_act_window" parent="hospital_analysis_root_menu" name="Analysis" sequence="100"/>
+    <menuitem id="hospital_analysis_indicator_menu" action="hospital_analysis_indicator_act_window" parent="hospital_analysis_root_menu" name="Analysis indicator" sequence="200"/>
+
+
+    <record id="hospital_analysis_indicator_value_form" model="ir.ui.view">
+        <field name="name">hospital.analysis.indicator.value.form</field>
+        <field name="model">hospital.analysis.indicator.value</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group col="5">
+                        <group colspan="3">
+                            <field name="analysis_indicator"/>
+                        </group>
+                        <group colspan="1">
+                            <field name="analysis_indicator_limit_lower" readonly="1" options="{'digits': [15, 3]}"/>
+                        </group>
+                        <group colspan="1">
+                            <field name="analysis_indicator_limit_upper" readonly="1" options="{'digits': [15, 3]}"/>
+                        </group>
+                    </group>
+                    <group>
+                        <!--    -->
+                        <field name="indicator_value" options="{'digits': [15, 3]}"/>   <!--    -->
+                        <field name="comment"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="hospital_analysis_indicator_value_tree" model="ir.ui.view">
+        <field name="name">hospital.analysis.indicator.value.tree</field>
+        <field name="model">hospital.analysis.indicator.value</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="analysis_indicator"/>
+                <field name="indicator_value" options="{'digits': [15, 3]}"/>   <!--    -->
+                <field name="analysis_indicator_limit_norm" optional="hide"/>
+                <field name="comment" optional="show"/>
+            </tree>
+        </field>
+    </record>
+
+</odoo>

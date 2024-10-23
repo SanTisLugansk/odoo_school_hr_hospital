@@ -23,6 +23,7 @@
              'views/hospital_doctor_views.xml',
              'views/hospital_diagnosis_views.xml',
              'views/hospital_patient_visit_views.xml',
+             'views/hospital_analysis_view.xml',
              'views/hospital_patient_views.xml',
              'views/hospital_doctor_change_views.xml',
              'views/hospital_doctor_schedule_views.xml',

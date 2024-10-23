@@ -15,8 +15,8 @@ class HospitalPatientVisit(models.Model):
     date = fields.Datetime(readonly=False, states={'done': [('readonly', True)]})
     doctor_id = fields.Many2one(comodel_name='hospital.doctor', compute='_compute_doctor_id', inverse='_inverse_doctor_id')
     diagnosis_ids = fields.One2many(comodel_name='hospital.diagnosis', inverse_name='visit_id',
-                                     # domain="[('doctor_id', '=', doctor_id), ('patient_id', '=', patient_id)]")
-                                     )
+                                    # domain="[('doctor_id', '=', doctor_id), ('patient_id', '=', patient_id)]")
+                                    )
     diagnosis_is_editable = fields.Boolean(compute='_compute_diagnosis_is_editable')
     schedule = fields.Many2one(comodel_name='hospital.doctor.schedule', readonly=False, states={'done': [('readonly', True)]})
 

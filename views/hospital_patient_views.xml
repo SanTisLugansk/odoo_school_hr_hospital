@@ -31,6 +31,7 @@
                     <button name="%(action_hospital_visit_history)d" string="visit history" type="action" context="{'patient_id': id}" class="btn-primary"/>
                     <button name="%(action_hospital_diagnosis_appointment_for_treatment_history)d"
                             string="Appointment for treatment history" type="action" context="{'patient_id': id}" class="btn-primary"/>
+                    <button name="%(action_hospital_analysis_history)d" string="analysis history" type="action" context="{'patient_id': id}" class="btn-primary"/>
                 </header>
                 <sheet>
                     <group col="6">
@@ -58,7 +59,7 @@
                                 <field name="doctor_id" width="70%"/>
                             </tree>
                         </field>
-                        <field name="diagnosis_ids" string="Diseases">
+                        <field name="diagnosis_ids" string="Diseases history">
                             <tree create="false" edit="false" delete="false">
                                 <field name="date"/>
                                 <field name="disease_ids" widget="many2many_tags"/>
